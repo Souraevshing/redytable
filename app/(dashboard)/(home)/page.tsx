@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { FaStar } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 
 type Restaurant = {
   name: string;
@@ -20,6 +21,7 @@ type Data = {
 
 export default function Home() {
   const [query, setQuery] = useState("");
+  const router = useRouter();
 
   const restaurants: Restaurant[] = [
     {
@@ -144,6 +146,7 @@ export default function Home() {
             <div
               key={index}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
+              onClick={() => router.push(`/restaurants/${index + 1}`)}
             >
               <Image
                 src={restaurant.imageUrl}
@@ -213,6 +216,7 @@ export default function Home() {
             <div
               key={index}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
+              onClick={() => router.push(`/restaurants/${index + 1}`)}
             >
               <Image
                 src={restaurant.imageUrl}

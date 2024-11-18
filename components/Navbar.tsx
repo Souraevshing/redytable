@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Dialog } from '@headlessui/react';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Dialog } from "@headlessui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 
@@ -64,7 +64,10 @@ export default function Navbar() {
 
         {/* Log In Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/signin" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            href="/signin"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Log in <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
