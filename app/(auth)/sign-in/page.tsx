@@ -23,13 +23,16 @@ const SignInUser = () => {
     resolver: zodResolver(SignInSchema),
   });
 
-  const onSubmit = (formData: SignInFormData) => {
+  const onSubmit = async (formData: SignInFormData) => {
     if (isValid) {
-      console.log(formData);
-      //TODO add sign-in
-      console.log("sign in success");
+      try {
+        // TODO: Replace with your actual auth logic
+        console.log(formData);
+        reset();
+      } catch (err) {
+        console.error(err);
+      }
     }
-    reset();
   };
 
   return (
@@ -50,7 +53,7 @@ const SignInUser = () => {
             Welcome Back!
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Input Field */}
+            {/* Email/Phone Field */}
             <div>
               <label
                 htmlFor="emailOrPhone"
@@ -71,6 +74,28 @@ const SignInUser = () => {
               {errors && (
                 <p className="mt-2 text-sm text-red-500">
                   {errors?.emailOrPhone?.message}
+                </p>
+              )}
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                {...register("password")}
+                className="mt-2"
+              />
+              {errors.password && (
+                <p className="mt-2 text-sm text-red-500">
+                  {errors.password.message}
                 </p>
               )}
             </div>
