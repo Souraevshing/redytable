@@ -1,5 +1,16 @@
-const DashboardLayout = () => {
-  return <div>layout</div>;
-};
+/**
+ * @description `layout` wrapper for dashboard
+ * @param children ReactNode
+ */
 
-export default DashboardLayout;
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <main>{children}</main>
+    </div>
+  );
+}
