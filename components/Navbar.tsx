@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Dialog } from '@headlessui/react';
+import { Dialog, DialogPanel } from "@headlessui/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
+  { href: "/onboard", label: "Home" },
   { href: "/restaurants", label: "Restaurants" },
   { href: "/book", label: "Book a Table" },
 ];
@@ -64,7 +64,10 @@ export default function Navbar() {
 
         {/* Log In Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/signin" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            href="/sign-in"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Log in <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
@@ -78,7 +81,7 @@ export default function Navbar() {
         onClose={() => setMobileMenuOpen(false)}
       >
         <div className="fixed inset-0 z-10 bg-gray-700/30" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full max-w-sm overflow-y-auto bg-white px-6 py-6 sm:ring-1 sm:ring-gray-900/10">
+        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full max-w-sm overflow-y-auto bg-white px-6 py-6 sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center">
               <span className="sr-only">Your Company</span>
@@ -114,7 +117,7 @@ export default function Navbar() {
               </div>
               <div className="py-6">
                 <Link
-                  href="/signin"
+                  href="/sign-in"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
@@ -122,7 +125,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </Dialog.Panel>
+        </DialogPanel>
       </Dialog>
     </header>
   );
