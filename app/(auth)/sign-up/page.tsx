@@ -17,12 +17,17 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isValid },
   } = useForm<SignUpFormData>({ resolver: zodResolver(SignUpSchema) });
 
   const onSubmit = (formData: SignUpFormData) => {
-    console.log(formData);
-    //TODO handle sign up user
+    if (isValid) {
+      console.log(formData);
+      //TODO handle sign up user
+      console.log("sign up success");
+    }
+    reset();
   };
 
   return (

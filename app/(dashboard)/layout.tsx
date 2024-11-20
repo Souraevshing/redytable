@@ -1,3 +1,8 @@
+/**
+ * @description `layout` wrapper for dashboard
+ * @param children ReactNode
+ */
+
 export default function DashboardLayout({
   children,
 }: {

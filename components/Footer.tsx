@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+/**
+ * @description footer component
+ */
 const Footer = () => {
   return (
     <footer className="bg-white">
@@ -21,6 +24,7 @@ const Footer = () => {
             </p>
 
             <ul className="mt-8 flex gap-6">
+              {/* facebook logo */}
               <li>
                 <a
                   href="/"
@@ -45,6 +49,7 @@ const Footer = () => {
                 </a>
               </li>
 
+              {/* instagram logo */}
               <li>
                 <a
                   href="/"
@@ -69,6 +74,7 @@ const Footer = () => {
                 </a>
               </li>
 
+              {/* twitter logo */}
               <li>
                 <a
                   href="/"
@@ -89,6 +95,7 @@ const Footer = () => {
                 </a>
               </li>
 
+              {/* github logo */}
               <li>
                 <a
                   href="/"
@@ -113,6 +120,7 @@ const Footer = () => {
                 </a>
               </li>
 
+              {/* dribble logo */}
               <li>
                 <a
                   href="/"
@@ -142,7 +150,6 @@ const Footer = () => {
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
             <div>
               <p className="font-medium text-gray-900">Discover</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
@@ -157,7 +164,6 @@ const Footer = () => {
 
             <div>
               <p className="font-medium text-gray-900">Top Cuisines</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
@@ -190,7 +196,6 @@ const Footer = () => {
 
             <div>
               <p className="font-medium text-gray-900">Top Facilities</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
@@ -223,7 +228,6 @@ const Footer = () => {
 
             <div>
               <p className="font-medium text-gray-900">Top Loaction</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
@@ -266,7 +270,7 @@ const Footer = () => {
         </div>
 
         <p className="text-xs text-gray-500">
-          &copy; 2024. Company Name. All rights reserved.
+          &copy; {new Date().getFullYear()}. Company Name. All rights reserved.
         </p>
       </div>
     </footer>

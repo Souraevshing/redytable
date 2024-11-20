@@ -45,3 +45,8 @@ declare interface RestaurantCuisineProps {
 declare interface RestaurantTagProps {
   tags: string[];
 }
+
+declare interface NavbarLinkProps {
+  href: string;
+  label: string;
+}

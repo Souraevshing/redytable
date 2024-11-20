@@ -17,14 +17,19 @@ const SignInUser = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isValid },
   } = useForm<SignInFormData>({
     resolver: zodResolver(SignInSchema),
   });
 
   const onSubmit = (formData: SignInFormData) => {
-    console.log(formData);
-    //TODO add sign-in
+    if (isValid) {
+      console.log(formData);
+      //TODO add sign-in
+      console.log("sign in success");
+    }
+    reset();
   };
 
   return (
