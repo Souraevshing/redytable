@@ -27,29 +27,54 @@ export default function Home() {
     {
       name: "My Bar Headquarters",
       location: "Connaught Place, Central Delhi",
-      imageUrl: "/1.jpg", // Placeholder for actual image paths
+      imageUrl: "/interior/interior_8.jpg", // Placeholder for actual image paths
       rating: 4.5,
     },
     {
       name: "The G.T. Road",
       location: "Connaught Place, Central Delhi",
-      imageUrl: "/2.jpg",
+      imageUrl: "/interior/interior_5.jpg",
       rating: 4.3,
     },
     {
       name: "Sandoz",
       location: "Connaught Place, Central Delhi",
-      imageUrl: "/3.jpg",
+      imageUrl: "/interior/interior_3.jpg",
       rating: 3.9,
     },
     {
       name: "Barbeque Nation",
       location: "Connaught Place, Central Delhi",
-      imageUrl: "/4.jpg",
+      imageUrl: "/table/barbeque.jpg",
       rating: 4.3,
     },
   ];
-
+  // const restaurantsForYou: Restaurant[] = [
+  //   {
+  //     name: "My Bar Headquarters",
+  //     location: "Connaught Place, Central Delhi",
+  //     imageUrl: "/interior/interior_8.jpg", // Placeholder for actual image paths
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     name: "The G.T. Road",
+  //     location: "Connaught Place, Central Delhi",
+  //     imageUrl: "/interior/interior_5.jpg",
+  //     rating: 4.3,
+  //   },
+  //   {
+  //     name: "Sandoz",
+  //     location: "Connaught Place, Central Delhi",
+  //     imageUrl: "/interior/interior_3.jpg",
+  //     rating: 3.9,
+  //   },
+  //   {
+  //     name: "Barbeque Nation",
+  //     location: "Connaught Place, Central Delhi",
+  //     imageUrl: "/table/barbeque.jpg",
+  //     rating: 4.3,
+  //   },
+  // ];
   const data: Data[] = [
     {
       name: "Party Vibes",
@@ -57,7 +82,7 @@ export default function Home() {
     },
     {
       name: "Drink and Dine",
-      imageUrl: "/2.jpg",
+      imageUrl: "/interior/interior_bar.jpg",
     },
     {
       name: "Breakfast",
@@ -65,11 +90,11 @@ export default function Home() {
     },
     {
       name: "Cafes",
-      imageUrl: "/4.jpg",
+      imageUrl: "/interior/interior_4.jpg",
     },
     {
       name: "Premium Dining",
-      imageUrl: "/1.jpg", // Placeholder for actual image paths
+      imageUrl: "/table/table_1.jpg", // Placeholder for actual image paths
     },
     {
       name: "Event Experiences",
@@ -77,7 +102,7 @@ export default function Home() {
     },
     {
       name: "Romantic Dining",
-      imageUrl: "/3.jpg",
+      imageUrl: "/table/table_4.jpg",
     },
     {
       name: "Family Dining",
