@@ -8,10 +8,6 @@ export const SignInSchema = z.object({
     .string()
     .email({ message: "Invalid email address" })
     .max(100, { message: "Email must not exceed 100 characters" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" })
-    .max(100, { message: "Password must not exceed 100 characters" }),
 });
 
 // Type for the Sign In form
