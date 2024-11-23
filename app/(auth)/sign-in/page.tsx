@@ -28,9 +28,7 @@ const SignInUser = () => {
   });
 
   const dispatch = useDispatch<AppDispatch>();
-  const { error } = useSelector<RootState, SignUpState>(
-    (state: RootState) => state.signUp
-  );
+  const { error } = useSelector((state: RootState) => state.signIn);
 
   const onSubmit = async (formData: SignInFormData) => {
     if (isValid) {

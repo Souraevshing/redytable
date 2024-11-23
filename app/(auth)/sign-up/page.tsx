@@ -26,9 +26,7 @@ const SignUp = () => {
   } = useForm<SignUpFormData>({ resolver: zodResolver(SignUpSchema) });
 
   const dispatch = useDispatch<AppDispatch>();
-  const { error } = useSelector<RootState, SignUpState>(
-    (state: RootState) => state.signUp
-  );
+  const { error } = useSelector((state: RootState) => state.signUp);
 
   const onSubmit = async (formData: SignUpFormData) => {
     if (isValid) {

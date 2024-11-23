@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * @description `layout` wrapper for dashboard
  * @param children ReactNode

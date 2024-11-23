@@ -3,11 +3,8 @@ import { z } from "zod";
 export const SignInSchema = z.object({
   emailOrPhone: z
     .string()
-    .refine(
-      (value) =>
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || /^\d{10}$/.test(value),
-      { message: "Enter a valid email or 10-digit phone number" }
-    ),
+    .email({ message: "Invalid email address" })
+    .max(100, { message: "Email must not exceed 100 characters" }),
 });
 
 // Type for the Sign In form
