@@ -4,11 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Images } from "@/constants";
+import { dashboardLogo6 } from "@/constants/images";
+import { signUpUser } from "@/lib/features/signUpSlice";
+import { AppDispatch, RootState } from "@/lib/store";
 import { SignUpFormData, SignUpSchema } from "@/schemas/SignUpSchema";
+import { showErrorToast, showPromiseToast } from "@/utils/hooks/useToast";
 
 /**
  * @description `sign-up` user
@@ -21,13 +25,27 @@ const SignUp = () => {
     formState: { errors, isValid },
   } = useForm<SignUpFormData>({ resolver: zodResolver(SignUpSchema) });
 
-  const onSubmit = (formData: SignUpFormData) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading, error } = useSelector<RootState, SignUpState>(
+    (state: RootState) => state.signUp
+  );
+
+  const onSubmit = async (formData: SignUpFormData) => {
     if (isValid) {
-      console.log(formData);
-      //TODO handle sign up user
-      console.log("sign up success");
+      try {
+        await showPromiseToast(dispatch(signUpUser(formData)).unwrap(), {
+          loading: "Signing up",
+          success: "Sign up success",
+          error: " Sign up failed",
+        });
+        reset();
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          showErrorToast(error!.message);
+        }
+        console.error(err);
+      }
     }
-    reset();
   };
 
   return (
@@ -35,11 +53,11 @@ const SignUp = () => {
       <div className="flex w-4/5 max-w-4xl h-[80vh] overflow-hidden rounded-lg shadow-lg bg-white">
         <div className="w-1/2 h-full">
           <Image
-            src={Images.dashboardLogo6}
+            src={dashboardLogo6}
             alt="sign_up"
             width={1000}
             height={1000}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover sm:hidden"
           />
         </div>
 
@@ -128,6 +146,7 @@ const SignUp = () => {
             {/* SignUp button */}
             <Button
               type="submit"
+              disabled={loading}
               className="w-full bg-red-500 hover:bg-red-600 text-white"
             >
               Sign Up

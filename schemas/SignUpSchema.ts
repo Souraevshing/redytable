@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 
 /**
@@ -10,11 +12,9 @@ export const SignUpSchema = z.object({
     .max(50, { message: "Name must not exceed 50 characters" })
     .regex(/^[a-zA-Z\s]+$/, { message: "Name must contain only alphabets" }),
 
-  mobile: z
-    .string()
-    .regex(/^[0-9]{10}$/, {
-      message: "Mobile number must be exactly 10 digits",
-    }),
+  mobile: z.string().regex(/^[0-9]{10}$/, {
+    message: "Mobile number must be exactly 10 digits",
+  }),
 
   email: z
     .string()

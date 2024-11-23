@@ -1,12 +1,12 @@
 import { restaurants } from "@/constants/restaurants";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 /**
  * @description Handles `GET` requests to filter restaurants by a query.
  * @param req Request object
  * @returns Filtered restaurants
  */
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const query = searchParams.get("query");
 

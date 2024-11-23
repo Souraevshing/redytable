@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Provider } from "react-redux";
+import { Toaster } from "sonner";
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import store from "@/lib/store";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import "./globals.css";
 
@@ -22,6 +25,9 @@ export const metadata: Metadata = {
   description: "Kuch pal apno ke liye",
 };
 
+/**
+ * @description `root` layout is the index or root file that is `rendered` for the first time
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,11 +38,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </ReactQueryProvider>
+        <Provider store={store}>
+          <ReactQueryProvider>
+            <Toaster
+              richColors={true}
+              closeButton={true}
+              duration={300}
+              position="top-center"
+              theme="dark"
+              toastOptions={{ style: { appearance: "progress-bar" } }}
+            />
+            <Navbar />
+
+            {children}
+
+            <Footer />
+          </ReactQueryProvider>
+        </Provider>
       </body>
     </html>
   );

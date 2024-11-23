@@ -1,12 +1,14 @@
 "use client";
 
-import { navbarLinks } from "@/constants/navbar-links";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+
+import { navLogo } from "@/constants/images";
+import { navbarLinks } from "@/constants/navbar-links";
 
 /**
  * @description `navbar` component common to all pages
@@ -25,7 +27,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center">
             <span className="sr-only">Your Company</span>
             <Image
-              src="/logo.png" // Replace this with your logo file path
+              src={navLogo}
               alt="Your Company Logo"
               width={180}
               height={180}
@@ -88,7 +90,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center">
               <span className="sr-only">Your Company</span>
               <Image
-                src="/logo.png" // Replace this with your logo file path
+                src={navLogo}
                 alt="Your Company Logo"
                 width={40}
                 height={40}

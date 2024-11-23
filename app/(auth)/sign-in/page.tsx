@@ -4,11 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Images } from "@/constants";
+import { dashboardLogo5 } from "@/constants/images";
+import { signInUser } from "@/lib/features/signInSlice";
+import { AppDispatch, RootState } from "@/lib/store";
 import { SignInFormData, SignInSchema } from "@/schemas/SignInSchema";
+import { showErrorToast, showPromiseToast } from "@/utils/hooks/useToast";
 
 /**
  * @description `sign-in` user
@@ -23,13 +27,25 @@ const SignInUser = () => {
     resolver: zodResolver(SignInSchema),
   });
 
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading, error } = useSelector<RootState, SignUpState>(
+    (state: RootState) => state.signUp
+  );
+
   const onSubmit = async (formData: SignInFormData) => {
     if (isValid) {
       try {
-        // TODO: Replace with your actual auth logic
+        await showPromiseToast(dispatch(signInUser(formData)).unwrap(), {
+          loading: "Signing in",
+          success: "Sign in success",
+          error: " Sign in failed",
+        });
         console.log(formData);
         reset();
-      } catch (err) {
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          showErrorToast(error!.message);
+        }
         console.error(err);
       }
     }
@@ -40,11 +56,11 @@ const SignInUser = () => {
       <div className="flex w-4/5 max-w-4xl h-[80vh] overflow-hidden rounded-lg shadow-lg bg-white">
         <div className="w-1/2 h-full">
           <Image
-            src={Images.dashboardLogo5}
+            src={dashboardLogo5}
             alt="login_logo"
             width={1000}
             height={1000}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover sm:hidden"
           />
         </div>
 
@@ -78,31 +94,10 @@ const SignInUser = () => {
               )}
             </div>
 
-            {/* Password Field */}
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                {...register("password")}
-                className="mt-2"
-              />
-              {errors.password && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-
             {/* SignIn button */}
             <Button
               type="submit"
+              disabled={loading}
               className="w-full bg-red-500 hover:bg-red-600 text-white"
             >
               Submit

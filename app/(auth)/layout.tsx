@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * @description `wrapper` containing code to `authenticate` user
  * @param children ReactNode
