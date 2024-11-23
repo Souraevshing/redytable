@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Toaster } from "sonner";
 
-import Footer from "@/components/Footer";
+import FooterWrapper from "@/components/FooterWrapper";
 import Navbar from "@/components/Navbar";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import StoreProvider from "@/providers/StoreProvider";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -22,6 +24,9 @@ export const metadata: Metadata = {
   description: "Kuch pal apno ke liye",
 };
 
+/**
+ * @description `root` layout is the index or root file that is `rendered` for the first time
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,11 +37,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </ReactQueryProvider>
+        <StoreProvider>
+          <ReactQueryProvider>
+            <Toaster
+              richColors={true}
+              closeButton={true}
+              duration={300}
+              position="top-center"
+              theme="dark"
+              toastOptions={{ style: { appearance: "progress-bar" } }}
+            />
+            <Navbar />
+            {children}
+            <FooterWrapper />
+          </ReactQueryProvider>
+        </StoreProvider>
       </body>
     </html>
   );

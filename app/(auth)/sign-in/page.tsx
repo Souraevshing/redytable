@@ -4,11 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Images } from "@/constants";
+import { dashboardLogo5 } from "@/constants/images";
+import { signInUser } from "@/lib/features/signInSlice";
+import { AppDispatch, RootState } from "@/lib/store";
 import { SignInFormData, SignInSchema } from "@/schemas/SignInSchema";
+import { showErrorToast, showPromiseToast } from "@/utils/hooks/useToast";
 
 /**
  * @description `sign-in` user
@@ -23,13 +27,23 @@ const SignInUser = () => {
     resolver: zodResolver(SignInSchema),
   });
 
+  const dispatch = useDispatch<AppDispatch>();
+  const { error } = useSelector((state: RootState) => state.signIn);
+
   const onSubmit = async (formData: SignInFormData) => {
     if (isValid) {
       try {
-        // TODO: Replace with your actual auth logic
+        await showPromiseToast(dispatch(signInUser(formData)).unwrap(), {
+          loading: "Signing in",
+          success: "Sign in success",
+          error: " Sign in failed",
+        });
         console.log(formData);
         reset();
-      } catch (err) {
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          showErrorToast(error!.message);
+        }
         console.error(err);
       }
     }
@@ -40,7 +54,7 @@ const SignInUser = () => {
       <div className="flex w-4/5 max-w-4xl h-[80vh] overflow-hidden rounded-lg shadow-lg bg-white">
         <div className="w-1/2 h-full">
           <Image
-            src={Images.dashboardLogo5}
+            src={dashboardLogo5}
             alt="login_logo"
             width={1000}
             height={1000}
@@ -58,52 +72,34 @@ const SignInUser = () => {
               <label
                 htmlFor="emailOrPhone"
                 id="emailOrPhone"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 outline-none"
               >
-                Enter mobile no or email
+                Enter email or phone number
               </label>
               <Input
                 id="emailOrPhone"
                 type="text"
-                placeholder="Enter your Mobile no. or Gmail Address"
+                placeholder="Enter email or phone number"
                 {...register("emailOrPhone")}
-                className="mt-2"
+                className="mt-2 outline-none"
               />
 
-              {/* display errors if validation fails */}
-              {errors && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors?.emailOrPhone?.message}
-                </p>
-              )}
-            </div>
-
-            {/* Password Field */}
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                {...register("password")}
-                className="mt-2"
-              />
-              {errors.password && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.password.message}
-                </p>
+              {errors?.emailOrPhone && (
+                <div className="mt-2">
+                  {/* Display both email and phone validation error messages */}
+                  {errors.emailOrPhone.message?.includes("email") && (
+                    <p className="text-sm text-red-500">
+                      Invalid email address or phone number
+                    </p>
+                  )}
+                </div>
               )}
             </div>
 
             {/* SignIn button */}
             <Button
               type="submit"
-              className="w-full bg-red-500 hover:bg-red-600 text-white"
+              className={`w-full bg-red-500 hover:bg-red-600 text-white`}
             >
               Submit
             </Button>
