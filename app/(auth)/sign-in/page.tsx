@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Images } from "@/constants";
+import { dashboardLogo5 } from "@/constants/images";
 import { signInUser } from "@/lib/features/signInSlice";
 import { AppDispatch, RootState } from "@/lib/store";
 import { SignInFormData, SignInSchema } from "@/schemas/SignInSchema";
@@ -56,7 +56,7 @@ const SignInUser = () => {
       <div className="flex w-4/5 max-w-4xl h-[80vh] overflow-hidden rounded-lg shadow-lg bg-white">
         <div className="w-1/2 h-full">
           <Image
-            src={Images.dashboardLogo5}
+            src={dashboardLogo5}
             alt="login_logo"
             width={1000}
             height={1000}

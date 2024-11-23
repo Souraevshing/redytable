@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { usePathname } from "next/navigation";
 import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 
@@ -34,12 +33,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // get current route url
-  const pathname = usePathname();
-
-  // exclude sign-in and sign-up route to exclude navbar and footer in both layouts
-  const excludedLayoutRoutes = ["/sign-in", "sign-up"].includes(pathname);
-
   return (
     <html lang="en">
       <body
@@ -55,11 +48,11 @@ export default function RootLayout({
               theme="dark"
               toastOptions={{ style: { appearance: "progress-bar" } }}
             />
-            {!excludedLayoutRoutes && <Navbar />}
+            <Navbar />
 
             {children}
 
-            {!excludedLayoutRoutes && <Footer />}
+            <Footer />
           </ReactQueryProvider>
         </Provider>
       </body>

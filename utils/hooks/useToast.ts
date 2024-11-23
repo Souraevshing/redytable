@@ -1,4 +1,5 @@
-// toastUtils.ts
+"use client";
+
 import { toast } from "sonner";
 
 /**

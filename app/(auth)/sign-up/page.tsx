@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Images } from "@/constants";
+import { dashboardLogo6 } from "@/constants/images";
 import { signUpUser } from "@/lib/features/signUpSlice";
 import { AppDispatch, RootState } from "@/lib/store";
 import { SignUpFormData, SignUpSchema } from "@/schemas/SignUpSchema";
@@ -53,7 +53,7 @@ const SignUp = () => {
       <div className="flex w-4/5 max-w-4xl h-[80vh] overflow-hidden rounded-lg shadow-lg bg-white">
         <div className="w-1/2 h-full">
           <Image
-            src={Images.dashboardLogo6}
+            src={dashboardLogo6}
             alt="sign_up"
             width={1000}
             height={1000}

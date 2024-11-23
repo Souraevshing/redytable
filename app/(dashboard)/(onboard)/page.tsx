@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import Image from "next/image";
@@ -39,10 +38,8 @@ const OnboardUser = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
 
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     data: searchResults = [],
-    error,
-    isError,
-    isFetching,
   } = useQuery(
     ["search", debouncedSearchTerm],
     () => fetchSearchQueryResults(debouncedSearchTerm),
