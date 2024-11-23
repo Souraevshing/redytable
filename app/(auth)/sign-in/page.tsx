@@ -28,7 +28,7 @@ const SignInUser = () => {
   });
 
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, error } = useSelector<RootState, SignUpState>(
+  const { error } = useSelector<RootState, SignUpState>(
     (state: RootState) => state.signUp
   );
 
@@ -60,7 +60,7 @@ const SignInUser = () => {
             alt="login_logo"
             width={1000}
             height={1000}
-            className="h-full w-full object-cover sm:hidden"
+            className="h-full w-full object-cover"
           />
         </div>
 
@@ -74,31 +74,34 @@ const SignInUser = () => {
               <label
                 htmlFor="emailOrPhone"
                 id="emailOrPhone"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 outline-none"
               >
-                Enter mobile no or email
+                Enter email or phone number
               </label>
               <Input
                 id="emailOrPhone"
                 type="text"
-                placeholder="Enter your Mobile no. or Gmail Address"
+                placeholder="Enter email or phone number"
                 {...register("emailOrPhone")}
-                className="mt-2"
+                className="mt-2 outline-none"
               />
 
-              {/* display errors if validation fails */}
-              {errors && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors?.emailOrPhone?.message}
-                </p>
+              {errors?.emailOrPhone && (
+                <div className="mt-2">
+                  {/* Display both email and phone validation error messages */}
+                  {errors.emailOrPhone.message?.includes("email") && (
+                    <p className="text-sm text-red-500">
+                      Invalid email address or phone number
+                    </p>
+                  )}
+                </div>
               )}
             </div>
 
             {/* SignIn button */}
             <Button
               type="submit"
-              disabled={loading}
-              className="w-full bg-red-500 hover:bg-red-600 text-white"
+              className={`w-full bg-red-500 hover:bg-red-600 text-white`}
             >
               Submit
             </Button>

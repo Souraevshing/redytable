@@ -26,7 +26,7 @@ const SignUp = () => {
   } = useForm<SignUpFormData>({ resolver: zodResolver(SignUpSchema) });
 
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, error } = useSelector<RootState, SignUpState>(
+  const { error } = useSelector<RootState, SignUpState>(
     (state: RootState) => state.signUp
   );
 
@@ -57,7 +57,7 @@ const SignUp = () => {
             alt="sign_up"
             width={1000}
             height={1000}
-            className="h-full w-full object-cover sm:hidden"
+            className="h-full w-full object-cover"
           />
         </div>
 
@@ -74,7 +74,7 @@ const SignUp = () => {
                 id="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                Enter Your Name
+                Enter name
               </label>
 
               <Input
@@ -105,7 +105,7 @@ const SignUp = () => {
               <Input
                 id="mobile"
                 type="tel"
-                placeholder="Your Mobile Number"
+                placeholder="Enter mobile number"
                 {...register("mobile")}
                 className="mt-2"
               />
@@ -130,7 +130,7 @@ const SignUp = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="Email address"
+                placeholder="Enter email"
                 {...register("email")}
                 className="mt-2"
               />
@@ -146,7 +146,6 @@ const SignUp = () => {
             {/* SignUp button */}
             <Button
               type="submit"
-              disabled={loading}
               className="w-full bg-red-500 hover:bg-red-600 text-white"
             >
               Sign Up

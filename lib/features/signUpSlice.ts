@@ -35,7 +35,7 @@ export const signUpUser = createAsyncThunk(
 const signUpSlice = createSlice({
   name: "signup",
   initialState: {
-    loading: false,
+    loading: true,
     error: null as { status: number; message: string } | null,
     user: null,
   },
@@ -43,7 +43,7 @@ const signUpSlice = createSlice({
     resetSignUpState: (state) => {
       state.user = null;
       state.error = null;
-      state.loading = false;
+      state.loading = true;
     },
   },
   extraReducers(builder) {

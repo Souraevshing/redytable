@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Provider } from "react-redux";
 import { Toaster } from "sonner";
 
-import Footer from "@/components/Footer";
+import FooterWrapper from "@/components/FooterWrapper";
 import Navbar from "@/components/Navbar";
-import store from "@/lib/store";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import StoreProvider from "@/providers/StoreProvider";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -38,7 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Provider store={store}>
+        <StoreProvider>
           <ReactQueryProvider>
             <Toaster
               richColors={true}
@@ -49,12 +48,10 @@ export default function RootLayout({
               toastOptions={{ style: { appearance: "progress-bar" } }}
             />
             <Navbar />
-
             {children}
-
-            <Footer />
+            <FooterWrapper />
           </ReactQueryProvider>
-        </Provider>
+        </StoreProvider>
       </body>
     </html>
   );

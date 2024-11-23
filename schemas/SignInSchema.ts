@@ -1,15 +1,13 @@
-"use client";
-
 import { z } from "zod";
 
-/**
- * @description `schema` for `validating` `sign-in` form
- */
 export const SignInSchema = z.object({
   emailOrPhone: z
     .string()
-    .email({ message: "Invalid email address" })
-    .max(100, { message: "Email must not exceed 100 characters" }),
+    .refine(
+      (value) =>
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || /^\d{10}$/.test(value),
+      { message: "Enter a valid email or 10-digit phone number" }
+    ),
 });
 
 // Type for the Sign In form
