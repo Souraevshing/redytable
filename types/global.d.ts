@@ -50,9 +50,3 @@ declare interface NavbarLinkProps {
   href: string;
   label: string;
 }
-
-declare interface SignUpState {
-  loading: boolean;
-  error: { status: number; message: string } | null;
-  user: null;
-}
