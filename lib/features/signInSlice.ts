@@ -1,5 +1,6 @@
-import { SignInFormData } from "@/schemas/SignInSchema";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SignInFormData } from "@/schemas/SignInSchema";
 
 export const signInUser = createAsyncThunk(
   "login/loginUser",
