@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { Car, ChevronDown, Clock, Heart, MapPin, Star, Wifi, Wind } from "lucide-react";
+import { Car, ChevronDown, Clock, Heart, MapPin, Send, Star, Wifi, Wind } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -124,9 +124,12 @@ export default function Component() {
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
                 <MapPin className="w-4 h-4" />
-                <span>Connaught Place, Delhi</span>
+                <span>Connaught Place, Delhi | </span>
                 <Button variant="link" className="text-red-600 p-0">
-                  Direction
+                  <Send>
+                      
+                  </Send>
+                  Direction  
                 </Button>
               </div>
             </div>
@@ -163,7 +166,9 @@ export default function Component() {
                 </PopoverContent>
               </Popover>
             </div>
-            <Button>Book a Table</Button>
+            <Button className="bg-red-600 text-white hover:bg-red-700">
+              Book a Table
+              </Button>
           </div>
 
           <div className="mt-6">
@@ -335,7 +340,7 @@ export default function Component() {
                           className={cn(
                             "h-6 w-6",
                             userRating && star <= userRating 
-                              ? "fill-primary text-primary"
+                              ? "fill-yellow-400 text-primary text-yellow-400"
                               : "fill-none text-muted-foreground"
                           )}
                         />
@@ -364,7 +369,7 @@ export default function Component() {
                             className={cn(
                               "h-8 w-8",
                               userRating && star <= userRating 
-                                ? "fill-primary text-primary"
+                                ? "fill-yellow-400 text-primary text-yellow-400"
                                 : "fill-none text-muted-foreground"
                             )}
                           />
@@ -382,7 +387,7 @@ export default function Component() {
                       >
                         Cancel
                       </Button>
-                      <Button>Submit Rating</Button>
+                      <Button className="bg-red-600 text-white hover:bg-red-700">Submit Rating</Button>
                     </DialogFooter>
                   </div>
                 </DialogContent>
@@ -396,7 +401,7 @@ export default function Component() {
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-8 h-8 rounded-full bg-muted" />
                     <div>
-                      <div className="font-semibold">John Doe</div>
+                      <div className="font-semibold">Test person</div>
                       <div className="flex items-center gap-1">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -407,9 +412,7 @@ export default function Component() {
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
+                    Test text
                   </p>
                 </CardContent>
               </Card>
