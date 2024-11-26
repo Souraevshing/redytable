@@ -1,13 +1,15 @@
+import { StaticImageData } from "next/image";
+
 declare interface RestaurantListProps {
   name: string;
   location: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   rating: number;
 }
 
 declare interface CustomersChoiceProps {
   name: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
 }
 
 declare interface InputWithIconProps {
@@ -49,4 +51,12 @@ declare interface RestaurantTagProps {
 declare interface NavbarLinkProps {
   href: string;
   label: string;
+}
+
+declare interface RatingCircleProps {
+  rating: number;
+  maxRating?: number;
+  size?: "sm" | "md" | "lg";
+  className?: string;
+  reviewCount?: number;
 }

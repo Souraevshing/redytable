@@ -8,6 +8,8 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 
+import { navLogo } from "@/constants/images";
+
 /**
  * @description `navbar` component common to all pages
  */
@@ -25,8 +27,8 @@ export default function Navbar() {
           <Link href="/" className="flex items-center">
             <span className="sr-only">Your Company</span>
             <Image
-              src="/logo.png" // Replace this with your logo file path
-              alt="Your Company Logo"
+              src={navLogo}
+              alt="nav_logo"
               width={180}
               height={180}
               className="object-contain"
@@ -88,8 +90,8 @@ export default function Navbar() {
             <Link href="/" className="flex items-center">
               <span className="sr-only">Your Company</span>
               <Image
-                src="/logo.png" // Replace this with your logo file path
-                alt="Your Company Logo"
+                src={navLogo}
+                alt="nav_logo"
                 width={40}
                 height={40}
                 className="h-10 w-10 object-contain"

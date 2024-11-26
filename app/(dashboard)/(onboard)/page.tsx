@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 
 import { customerChoices } from "@/constants/customers-choice";
 import { restaurants } from "@/constants/restaurants";
+import { useRouter } from "next/navigation";
 
 /**
  * @description `filter` restaurants by sending `search query`
@@ -32,6 +33,8 @@ const fetchSearchQueryResults = async (query: string) => {
  * @description `home page` rendered first time the page loads
  */
 const OnboardUser = () => {
+  const router = useRouter();
+
   //search query passed inside search bar
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -115,7 +118,8 @@ const OnboardUser = () => {
             return (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
+                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                onClick={() => router.push(`/restaurants/${index + 1}`)}
               >
                 <Image
                   src={imageUrl}
@@ -192,7 +196,8 @@ const OnboardUser = () => {
             return (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
+                className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
+                onClick={() => router.push(`/restaurants/${index + 1}`)}
               >
                 <Image
                   src={imageUrl}

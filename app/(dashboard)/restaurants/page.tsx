@@ -12,6 +12,7 @@ import {
   timeOptions,
 } from "@/constants/restaurant-filters";
 import { restaurants } from "@/constants/restaurants";
+import { InputWithIconProps, RestaurantFilterProps } from "@/types/global";
 
 /**
  * @description render `restaurant` details implementing `filters`
