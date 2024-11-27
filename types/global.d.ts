@@ -5,6 +5,7 @@ declare interface RestaurantListProps {
   location: string;
   imageUrl: string | StaticImageData;
   rating: number;
+  distance: string;
 }
 
 declare interface CustomersChoiceProps {
@@ -59,4 +60,26 @@ declare interface RatingCircleProps {
   size?: "sm" | "md" | "lg";
   className?: string;
   reviewCount?: number;
+}
+
+declare interface ReservationProps {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+declare interface CustomerReviewProps {
+  author: string;
+  date: string;
+  rating: number;
+  content: string;
+}
+
+declare interface RestaurantDetailsProps {
+  name: string;
+  location: string;
+  address: string;
+  rating: number;
+  reviews: number;
 }
