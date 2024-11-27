@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
-import { FaCalendarAlt, FaClock, FaStar, FaUser } from "react-icons/fa";
+import { FaCalendarAlt, FaClock, FaUser } from "react-icons/fa";
 
+import RestaurantCard from "@/app/(dashboard)/restaurants/_components/RestaurantCard";
 import {
   cuisines,
   peopleOptions,
@@ -34,7 +34,7 @@ const Restaurants = () => {
   return (
     <div>
       <div className="bg-gray-100 p-6">
-        <div className="max-w-5xl mx-auto rounded-lg bg-white shadow-md p-6">
+        <div className="max-w-5xl mx-auto rounded-lg bg-gray-300 shadow-md p-6">
           <h2 className="text-xl font-semibold text-gray-800 text-center mb-6">
             Restaurants near Cox Arena
           </h2>
@@ -100,7 +100,7 @@ const Restaurants = () => {
             <input
               type="text"
               placeholder="Search"
-              className="w-full p-2 mb-4 border rounded-md focus:outline-none"
+              className="w-full p-2 mb-4 border rounded-md focus:outline-none bg-gray-300"
             />
             <div className="mb-6">
               <label className="block mb-2 text-sm font-semibold">
@@ -121,7 +121,7 @@ const Restaurants = () => {
             <input
               type="text"
               placeholder="Search for Cuisine"
-              className="w-full p-2 mb-4 border rounded-md focus:outline-none"
+              className="w-full p-2 mb-4 border rounded-md focus:outline-none bg-gray-300"
             />
             <div className="space-y-2">
               {cuisines.cuisines.map((cuisine, index) => {
@@ -137,7 +137,7 @@ const Restaurants = () => {
             <input
               type="text"
               placeholder="Search"
-              className="w-full p-2 mb-4 border rounded-md focus:outline-none"
+              className="w-full p-2 mb-4 border rounded-md focus:outline-none bg-gray-300"
             />
             <div className="space-y-2">
               {tags.tags.map((tag, index) => {
@@ -152,48 +152,8 @@ const Restaurants = () => {
 
           {/* Restaurant Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {restaurants.map(({ name, imageUrl, location, rating }, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
-              >
-                <Image
-                  src={imageUrl}
-                  alt={name}
-                  width={400}
-                  height={200}
-                  className="object-cover w-full h-56"
-                />
-                <div className="p-4 flex">
-                  <div className="w-3/4">
-                    <h3 className="text-lg font-bold">{name}</h3>
-                    <p className="text-gray-600 text-sm">{location}</p>
-                  </div>
-                  <div className="w-1/4 text-center">
-                    <div className="rounded-md bg-green-800 text-white px-[11px]">
-                      <span className="text-xl font-semibold">
-                        {rating}{" "}
-                        <FaStar className="inline w-5 h-5 -mt-2 mx-1" />
-                      </span>
-                    </div>
-                    <h2 className="text-[13px] font-semibold mt-1">
-                      ₹200 for two
-                    </h2>
-                  </div>
-                </div>
-                <div className="grid grid-cols-3 gap-2 p-2">
-                  {timeOptions.time.map((time, index) => {
-                    return (
-                      <button
-                        key={index}
-                        className="text-sm border border-red-500 text-red-500 py-1 px-3 rounded hover:bg-red-500 hover:text-white"
-                      >
-                        {time}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+            {restaurants.map((restaurant, index) => (
+              <RestaurantCard key={index} restaurant={restaurant} />
             ))}
           </div>
         </div>
