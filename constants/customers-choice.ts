@@ -1,36 +1,46 @@
-import { Images } from ".";
+import {
+  dashboardLogo1,
+  dashboardLogo2,
+  dashboardLogo3,
+  dashboardLogo4,
+  interiorBarLogo,
+  interiorLogo4,
+  tableLogo1,
+  tableLogo4,
+} from "@/constants/images";
+import { CustomersChoiceProps } from "@/types/global";
 
 export const customerChoices: CustomersChoiceProps[] = [
   {
     name: "Party Vibes",
-    imageUrl: Images.dashboardLogo1.src,
+    imageUrl: dashboardLogo1,
   },
   {
     name: "Drink and Dine",
-    imageUrl: Images.dashboardLogo2.src,
+    imageUrl: interiorBarLogo,
   },
   {
     name: "Breakfast",
-    imageUrl: Images.dashboardLogo3.src,
+    imageUrl: dashboardLogo3,
   },
   {
     name: "Cafes",
-    imageUrl: Images.dashboardLogo4.src,
+    imageUrl: interiorLogo4,
   },
   {
     name: "Premium Dining",
-    imageUrl: Images.dashboardLogo1.src,
+    imageUrl: tableLogo1,
   },
   {
     name: "Event Experiences",
-    imageUrl: Images.dashboardLogo2.src,
+    imageUrl: dashboardLogo2,
   },
   {
     name: "Romantic Dining",
-    imageUrl: Images.dashboardLogo3.src,
+    imageUrl: tableLogo4,
   },
   {
     name: "Family Dining",
-    imageUrl: Images.dashboardLogo4.src,
+    imageUrl: dashboardLogo4,
   },
 ];

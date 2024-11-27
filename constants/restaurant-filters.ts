@@ -1,3 +1,11 @@
+import {
+  RestaurantBookingTimeProps,
+  RestaurantCuisineProps,
+  RestaurantPeopleProps,
+  RestaurantQuickFilterProps,
+  RestaurantTagProps,
+} from "@/types/global";
+
 export const timeOptions: RestaurantBookingTimeProps = {
   time: ["19:00", "18:00", "20:00"],
 };
