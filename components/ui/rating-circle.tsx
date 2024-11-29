@@ -47,7 +47,7 @@ export function RatingCircle({
             r="40"
             fill="none"
             strokeWidth="var(--stroke-width)"
-            className="text-primary stroke-current text-green-600"
+            className="text-green-400 stroke-current"
             pathLength="100"
             strokeDasharray="100"
             strokeDashoffset={100 - percentage}

@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { ApiError } from "@/lib/api-utils";
+
 /**
  * Handles user signin requests
  * @param req NextRequest
  * @returns NextResponse
  */
 export async function POST(req: NextRequest) {
-  try {
-    // Extracting request body
-    const { emailOrPhone } = await req.json();
+  // Extracting request body
+  const { emailOrPhone } = await req.json();
 
-    // Validate the input data
-    if (!emailOrPhone) {
-      return NextResponse.json(
-        { error: "Email or phone is required." },
-        { status: 400 }
-      );
-    }
+  // Validate the input data
+  if (!emailOrPhone) {
+    throw new ApiError(400, "All fields are mandatory");
+  }
+
+  try {
     const res = await fetch(
       `http://localhost:7884/rest/v1/api/auth/verify-E?otpInput=${emailOrPhone}`,
       {
@@ -25,6 +25,11 @@ export async function POST(req: NextRequest) {
         headers: { "Content-Type": "application/json" },
       }
     );
+
+    // throw error for error response
+    if (!res.ok) {
+      throw new ApiError(res.status, await res.text());
+    }
 
     // Return success response
     return NextResponse.json(
@@ -36,11 +41,10 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Error during signin:", error);
 
-    return NextResponse.json(
-      {
-        error: "An unexpected error occurred. Please try again.",
-      },
-      { status: 500 }
-    );
+    if (error instanceof ApiError) {
+      throw error;
+    }
+
+    throw new ApiError(500, "Internal server error");
   }
 }

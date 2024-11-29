@@ -47,8 +47,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center bg-gray-100">
-      <div className="flex w-4/5 max-w-4xl h-[80vh] overflow-hidden rounded-lg shadow-lg bg-white">
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="flex w-4/5 max-w-4xl h-[90vh] overflow-hidden rounded-lg shadow-lg bg-white">
         <div className="w-1/2 h-full">
           <Image
             src={dashboardLogo6}
@@ -60,95 +60,98 @@ const SignUp = () => {
         </div>
 
         {/* create account section */}
-        <div className="w-1/2 flex flex-col justify-center p-8">
+        <div className="w-1/2 flex flex-col justify-between p-8 overflow-y-auto">
           <h2 className="mb-6 text-2xl font-semibold text-gray-800">
             Create Your Account!
           </h2>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* enter name */}
-            <div>
-              <label
-                htmlFor="name"
-                id="name"
-                className="block text-sm font-medium text-gray-700"
+          <div className="flex-grow overflow-y-auto pr-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* enter name */}
+              <div>
+                <label
+                  htmlFor="name"
+                  id="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Enter name
+                </label>
+
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter name"
+                  {...register("name")}
+                  className="mt-2"
+                />
+
+                {/* display errors if validation fails */}
+                {errors.name && (
+                  <p className="mt-2 text-sm text-red-500">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+
+              {/* enter mobile no */}
+              <div>
+                <label
+                  htmlFor="mobile"
+                  id="mobile"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Mobile Number
+                </label>
+                <Input
+                  id="mobile"
+                  type="tel"
+                  placeholder="Enter mobile number"
+                  {...register("mobile")}
+                  className="mt-2"
+                />
+
+                {/* display errors if validation fails */}
+                {errors.mobile && (
+                  <p className="mt-2 text-sm text-red-500">
+                    {errors.mobile.message}
+                  </p>
+                )}
+              </div>
+
+              {/* enter email */}
+              <div>
+                <label
+                  htmlFor="email"
+                  id="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter email"
+                  {...register("email")}
+                  className="mt-2"
+                />
+
+                {/* display errors if validation fails */}
+                {errors.email && (
+                  <p className="mt-2 text-sm text-red-500">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              {/* SignUp button */}
+              <Button
+                type="submit"
+                className="w-full bg-red-500 hover:bg-red-600 text-white"
               >
-                Enter name
-              </label>
-
-              <Input
-                id="name"
-                type="text"
-                placeholder="Enter name"
-                {...register("name")}
-                className="mt-2"
-              />
-
-              {/* display errors if validation fails */}
-              {errors.name && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-
-            {/* enter mobile no */}
-            <div>
-              <label
-                htmlFor="mobile"
-                id="mobile"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Mobile Number
-              </label>
-              <Input
-                id="mobile"
-                type="tel"
-                placeholder="Enter mobile number"
-                {...register("mobile")}
-                className="mt-2"
-              />
-
-              {/* display errors if validation fails */}
-              {errors.mobile && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.mobile.message}
-                </p>
-              )}
-            </div>
-
-            {/* enter email */}
-            <div>
-              <label
-                htmlFor="email"
-                id="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter email"
-                {...register("email")}
-                className="mt-2"
-              />
-
-              {/* display errors if validation fails */}
-              {errors.email && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-
-            {/* SignUp button */}
-            <Button
-              type="submit"
-              className="w-full bg-red-500 hover:bg-red-600 text-white"
-            >
-              Sign Up
-            </Button>
-
+                Sign Up
+              </Button>
+            </form>
+          </div>
+          <div className="mt-4">
             <p className="text-sm font-medium text-gray-700">
               Already have an account?{" "}
               <Link href="/sign-in">
@@ -157,9 +160,7 @@ const SignUp = () => {
                 </span>
               </Link>
             </p>
-
-            {/* terms and conditions */}
-            <p className="text-sm font-medium text-gray-700">
+            <p className="text-sm font-medium text-gray-700 mt-2">
               By signing up, you agree to the{" "}
               <span className="underline text-base font-bold cursor-pointer">
                 Terms of Use
@@ -170,7 +171,7 @@ const SignUp = () => {
               </span>
               .
             </p>
-          </form>
+          </div>
         </div>
       </div>
     </div>

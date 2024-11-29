@@ -60,6 +60,7 @@ declare interface RatingCircleProps {
   size?: "sm" | "md" | "lg";
   className?: string;
   reviewCount?: number;
+  fillColor?: string;
 }
 
 declare interface ReservationProps {

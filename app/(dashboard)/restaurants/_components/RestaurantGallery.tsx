@@ -13,7 +13,7 @@ import {
 export default function RestaurantGallery() {
   return (
     <div className="grid grid-cols-3 gap-4 h-[400px]">
-      <div className="col-span-2 relative rounded-lg overflow-hidden">
+      <div className="col-span-2 relative rounded-lg overflow-hidden cursor-pointer">
         <Image
           src={interiorLogo3}
           alt="Restaurant interior"
@@ -22,7 +22,7 @@ export default function RestaurantGallery() {
         />
       </div>
       <div className="space-y-4">
-        <div className="relative h-[192px] rounded-lg overflow-hidden">
+        <div className="relative h-[192px] rounded-lg overflow-hidden cursor-pointer">
           <Image
             src={interiorLogo4}
             alt="Restaurant interior"
@@ -30,7 +30,7 @@ export default function RestaurantGallery() {
             fill
           />
         </div>
-        <div className="relative h-[192px] rounded-lg overflow-hidden">
+        <div className="relative h-[192px] rounded-lg overflow-hidden cursor-pointer">
           <Image
             src={interiorLogo5}
             alt="Restaurant interior"

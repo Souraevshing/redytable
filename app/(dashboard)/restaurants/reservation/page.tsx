@@ -1,10 +1,11 @@
 "use client";
 
 import { Calendar } from "lucide-react";
-import * as React from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { MenuTab } from "@/components/ui/menu-tab";
 import {
   Select,
   SelectContent,
@@ -12,156 +13,104 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ReservationProps } from "@/types/global";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-/**
- * @description choose from the list of options available for rooms
- */
 export default function ReservationPage() {
-  const [menuItems, setMenuItems] = React.useState<ReservationProps[]>(
-    Array(8)
-      .fill(null)
-      .map((_, i) => ({
-        id: i + 1,
-        name: "Double Chicken Roll",
-        price: 168.57,
-        quantity: 0,
-      }))
-  );
-
-  const categories = [
-    { name: "New Chicken Rolls", count: 15 },
-    { name: "All Day Lunch Special Meal Box", count: 4 },
-    { name: "Burgers", count: 20 },
-    { name: "Peri Peri Chicken Strips & Leg Pc", count: 7 },
-    { name: "Buckets/ Meals for 1-2", count: 8 },
-    { name: "Buckets/ Meals for 3-4", count: 2 },
-    { name: "Rice Bowlz", count: 4 },
-    { name: "Value Snackers", count: 5 },
-    { name: "Hot & Crispy Chicken, Wings", count: 7 },
-    { name: "Boneless Chicken Popcorn", count: 2 },
-    { name: "Sides and Dips", count: 9 },
-    { name: "Desserts & Beverages", count: 18 },
+  const [selectedTime, setSelectedTime] = useState<string>();
+  const timeSlots = [
+    "8:15 PM",
+    "9:15 PM",
+    "10:15 PM",
+    "11:15 PM",
+    "12:15 PM",
+    "01:15 PM",
   ];
 
-  const updateQuantity = (id: number, increment: boolean) => {
-    setMenuItems((items) =>
-      items.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: increment
-                ? item.quantity + 1
-                : Math.max(0, item.quantity - 1),
-            }
-          : item
-      )
-    );
-  };
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Make Reservation</h1>
+    <div className="max-w-3xl mx-auto p-4 space-y-8">
+      <h1 className="text-3xl font-bold text-center">Make Reservation</h1>
 
-      <div className="grid gap-6 md:grid-cols-2 mb-8">
+      <div className="grid md:grid-cols-2 gap-4">
         <Select>
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full bg-gray-100">
             <SelectValue placeholder="Select Guest" />
           </SelectTrigger>
           <SelectContent>
-            {[1, 2, 3, 4, 5, 6].map((num) => (
-              <SelectItem key={num} value={num.toString()}>
-                {num} {num === 1 ? "Guest" : "Guests"}
-              </SelectItem>
-            ))}
+            <SelectItem value="1">1 Guest</SelectItem>
+            <SelectItem value="2">2 Guests</SelectItem>
+            <SelectItem value="3">3 Guests</SelectItem>
+            <SelectItem value="4">4 Guests</SelectItem>
           </SelectContent>
         </Select>
 
         <Select>
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full bg-gray-100">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               <SelectValue placeholder="Select Date" />
             </div>
           </SelectTrigger>
           <SelectContent>
-            {[...Array(7)].map((_, i) => {
-              const date = new Date();
-              date.setDate(date.getDate() + i);
-              return (
-                <SelectItem key={i} value={date.toISOString()}>
-                  {date.toLocaleDateString("en-US", {
-                    weekday: "short",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </SelectItem>
-              );
-            })}
+            <SelectItem value="today">Today</SelectItem>
+            <SelectItem value="tomorrow">Tomorrow</SelectItem>
+            <SelectItem value="next-week">Next Week</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
-      <Tabs defaultValue="time" className="w-full max-w-md mx-auto mb-8">
+      <Tabs defaultValue="time" className="w-full max-w-md mx-auto">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="time">Select time</TabsTrigger>
-          <TabsTrigger value="menu">Menu</TabsTrigger>
+          <TabsTrigger value="time" className="data-[state=active]:bg-pink-200">
+            Select time
+          </TabsTrigger>
+          <TabsTrigger value="menu" className="data-[state=active]:bg-pink-200">
+            Menu
+          </TabsTrigger>
         </TabsList>
+        <TabsContent value="time">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-2 mt-4">
+            {timeSlots.map((time, index) => (
+              <Button
+                key={index}
+                variant={selectedTime === time ? "outline" : "secondary"}
+                className={`${
+                  selectedTime === time ? "bg-gray-200" : "bg-white"
+                }`}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </Button>
+            ))}
+          </div>
+        </TabsContent>
+        <TabsContent value="menu">
+          <MenuTab />
+        </TabsContent>
       </Tabs>
 
-      <div className="grid md:grid-cols-[300px,1fr] gap-6">
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>Categories</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <nav className="space-y-2">
-              {categories.map((category, index) => (
-                <Button
-                  key={index}
-                  variant={index === 0 ? "secondary" : "ghost"}
-                  className="w-full justify-start text-left font-normal"
-                >
-                  {category.name} ({category.count})
-                </Button>
-              ))}
-            </nav>
-          </CardContent>
-        </Card>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          {menuItems.map((item) => (
-            <Card key={item.id}>
-              <CardHeader>
-                <CardTitle className="text-lg">{item.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex justify-between items-center">
-                <span className="text-lg">₹{item.price.toFixed(2)}</span>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => updateQuantity(item.id, false)}
-                    aria-label="Decrease quantity"
-                  >
-                    -
-                  </Button>
-                  <span className="w-8 text-center">{item.quantity}</span>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => updateQuantity(item.id, true)}
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+      <div className="text-center">
+        <Button variant="link" className="text-gray-600 font-semibold">
+          View All offers ▼
+        </Button>
       </div>
+
+      <div className="grid md:grid-cols-2 gap-4">
+        {[1, 2].map((index) => (
+          <Card key={index} className="p-4 relative">
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="font-bold text-lg">Flat 30% off</h3>
+                <p className="text-gray-500">25 cover charge required</p>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-gray-200" />
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <Button className="w-full bg-red-500 hover:bg-red-600 text-white py-6 text-lg">
+        Pay Now
+      </Button>
     </div>
   );
 }

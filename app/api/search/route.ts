@@ -1,4 +1,5 @@
 import { restaurants } from "@/constants/restaurants";
+import { ApiError } from "@/lib/api-utils";
 import { NextResponse } from "next/server";
 
 /**
@@ -11,15 +12,22 @@ export async function GET(req: Request) {
   const query = searchParams.get("query");
 
   if (!query) {
-    return NextResponse.json(
-      { error: "Query parameter is required" },
-      { status: 400 }
-    );
+    throw new ApiError(400, "Query parameter is required");
   }
 
-  const filteredRestaurants = restaurants.filter((restaurant) =>
-    restaurant.name.toLowerCase().includes(query.toLowerCase())
-  );
+  try {
+    const filteredRestaurants = restaurants.filter((restaurant) =>
+      restaurant.name.toLowerCase().includes(query.toLowerCase())
+    );
 
-  return NextResponse.json(filteredRestaurants, { status: 200 });
+    return NextResponse.json(filteredRestaurants, { status: 200 });
+  } catch (error) {
+    console.error(error);
+
+    if (error instanceof ApiError) {
+      throw error;
+    }
+
+    throw new ApiError(500, "Internal server error");
+  }
 }

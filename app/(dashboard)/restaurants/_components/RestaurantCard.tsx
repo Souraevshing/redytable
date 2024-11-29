@@ -14,7 +14,7 @@ const RestaurantCard = ({
   restaurant: RestaurantListProps;
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
       <Image
         src={restaurant.imageUrl}
         alt={restaurant.name}

@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { navLogo } from "@/constants/images";
-import { useRouter } from "next/navigation";
 
 /**
  * @description `navbar` component common to all pages
@@ -28,7 +28,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/book"
+            href="/restaurants/book"
             className="text-foreground hover:text-muted-foreground"
           >
             Book a table
