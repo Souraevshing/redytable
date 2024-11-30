@@ -1,19 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
-  try {
-    return NextResponse.next(); // Proceed with the request if no error
-  } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
+export function middleware() {
+  // You can add any global middleware logic here
+  // For example, you might want to add headers or check authentication
+
+  // For now, we'll just pass the request through
+  return NextResponse.next();
 }
 
-// Config to apply middleware to specific routes (if needed)
+// Optionally, you can specify which routes this middleware applies to
 export const config = {
-  matcher: "/",
+  matcher: "/api/:path*",
 };

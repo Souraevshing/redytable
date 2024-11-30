@@ -41,8 +41,12 @@ export default function RootLayout({
           <ReactQueryProvider>
             <Toaster
               richColors={true}
-              closeButton={true}
-              duration={300}
+              closeButton={false}
+              duration={3000}
+              visibleToasts={1}
+              expand={false}
+              hotkey={["escape", "Escape"]}
+              gap={20}
               position="top-center"
               theme="dark"
               toastOptions={{ style: { appearance: "progress-bar" } }}

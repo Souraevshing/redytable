@@ -12,20 +12,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-interface MenuItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ReservationProps } from "@/types/global";
 
 /**
- * @description book a restaurant after successful login
+ * @description choose from the list of options available for rooms
  */
-export default function ReservationPage() {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>(
+export default function BookingPage() {
+  const [activeTab, setActiveTab] = useState<string>("time");
+  const [menuItems, setMenuItems] = useState<ReservationProps[]>(
     Array(8)
       .fill(null)
       .map((_, i) => ({
@@ -65,6 +60,25 @@ export default function ReservationPage() {
       )
     );
   };
+
+  const TimeSelection = () => (
+    <div className="grid gap-4 md:grid-cols-4">
+      {[
+        "11:00 AM",
+        "12:00 PM",
+        "1:00 PM",
+        "2:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "7:00 PM",
+        "8:00 PM",
+      ].map((time, index) => (
+        <Button key={index} variant="outline" className="w-full">
+          {time}
+        </Button>
+      ))}
+    </div>
+  );
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -109,65 +123,77 @@ export default function ReservationPage() {
         </Select>
       </div>
 
-      <Tabs defaultValue="time" className="w-full max-w-md mx-auto mb-8">
+      <Tabs
+        defaultValue="time"
+        className="w-full max-w-md mx-auto mb-8"
+        onValueChange={setActiveTab}
+      >
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="time">Select time</TabsTrigger>
           <TabsTrigger value="menu">Menu</TabsTrigger>
         </TabsList>
+        <TabsContent value="time">
+          <TimeSelection />
+        </TabsContent>
+        <TabsContent value="menu">
+          {/* Menu content will be rendered here */}
+        </TabsContent>
       </Tabs>
 
-      <div className="grid md:grid-cols-[300px,1fr] gap-6">
-        <Card className="h-fit">
-          <CardHeader>
-            <CardTitle>Categories</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <nav className="space-y-2">
-              {categories.map((category, index) => (
-                <Button
-                  key={index}
-                  variant={index === 0 ? "secondary" : "ghost"}
-                  className="w-full justify-start text-left font-normal"
-                >
-                  {category.name} ({category.count})
-                </Button>
-              ))}
-            </nav>
-          </CardContent>
-        </Card>
+      {activeTab === "menu" && (
+        <div className="grid md:grid-cols-[300px,1fr] gap-6">
+          <Card className="h-fit">
+            <CardHeader>
+              <CardTitle>Categories</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <nav className="space-y-2">
+                {categories.map((category, index) => (
+                  <Button
+                    key={index}
+                    variant={index === 0 ? "secondary" : "ghost"}
+                    className="w-full justify-start text-left font-normal"
+                  >
+                    {category.name} ({category.count})
+                  </Button>
+                ))}
+              </nav>
+            </CardContent>
+          </Card>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {menuItems.map((item) => (
-            <Card key={item.id}>
-              <CardHeader>
-                <CardTitle className="text-lg">{item.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex justify-between items-center">
-                <span className="text-lg">₹{item.price.toFixed(2)}</span>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => updateQuantity(item.id, false)}
-                    aria-label="Decrease quantity"
-                  >
-                    -
-                  </Button>
-                  <span className="w-8 text-center">{item.quantity}</span>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => updateQuantity(item.id, true)}
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          <div className="grid gap-4 md:grid-cols-2">
+            {menuItems.map((item) => (
+              <Card key={item.id}>
+                <CardHeader>
+                  <CardTitle className="text-lg">{item.name}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex justify-between items-center">
+                  <span className="text-lg">₹{item.price.toFixed(2)}</span>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => updateQuantity(item.id, false)}
+                      aria-label="Decrease quantity"
+                    >
+                      -
+                    </Button>
+                    <span className="w-8 text-center">{item.quantity}</span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => updateQuantity(item.id, true)}
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

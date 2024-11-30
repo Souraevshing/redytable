@@ -13,7 +13,7 @@ export default function SimilarRestaurants() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {restaurants.map((restaurant, index) => (
           <div key={index} className="border rounded-lg overflow-hidden">
-            <div className="relative h-48">
+            <div className="relative h-48 cursor-pointer">
               <Image
                 src={restaurant.imageUrl}
                 alt={restaurant.name}
