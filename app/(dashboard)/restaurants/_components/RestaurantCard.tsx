@@ -40,7 +40,7 @@ const RestaurantCard = ({
           </p>
         </div>
       </div>
-      {/* <div className="grid grid-cols-4 gap-2 p-2">
+      <div className="grid grid-cols-4 gap-2 p-2">
         {timeOptions.time.map((time, index) => (
           <button
             key={index}
@@ -49,7 +49,7 @@ const RestaurantCard = ({
             {time}
           </button>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
