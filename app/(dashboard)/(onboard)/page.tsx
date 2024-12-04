@@ -3,15 +3,24 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
 import { useQuery } from "react-query";
-
+import { MdLocationPin } from "react-icons/md";
 import { customerChoices } from "@/constants/customers-choice";
 import { restaurants } from "@/constants/restaurants";
 import { useRouter } from "next/navigation";
-
+import { Input } from "@/components/ui/input";
+import { FaCaretDown, FaCaretUp, FaCrosshairs } from "react-icons/fa";
+import {
+  FaLeaf,
+  FaUtensils,
+  FaGift,
+  FaHeart,
+  FaHamburger,
+} from "react-icons/fa";
+import Banner from "@/components/banner";
 /**
  * @description `filter` restaurants by sending `search query`
  * @param query
@@ -28,6 +37,10 @@ const fetchSearchQueryResults = async (query: string) => {
 
   return res.json();
 };
+interface CategoryItem {
+  icon: ReactNode; // Icon component
+  label: string; // Text label
+}
 
 /**
  * @description `home page` rendered first time the page loads
@@ -40,6 +53,25 @@ const OnboardUser = () => {
 
   // debounce search results
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
+
+  const [location, setLocation] = useState("Pune");
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Toggle dropdown
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  // Open dropdown when focusing on the input
+  const handleFocus = () => {
+    setIsOpen(true);
+  };
+
+  const detectLocation = () => {
+    // Add logic for detecting location using GPS
+    console.log("Detecting current location...");
+    setLocation("Current Location");
+  };
 
   const {
     data: searchResults = [],
@@ -69,6 +101,20 @@ const OnboardUser = () => {
     }
   }, [debouncedSearchTerm]);
 
+  const categories: CategoryItem[] = [
+    {
+      icon: <FaHeart className="text-red-500 text-xl" />,
+      label: "Pocket Friendly",
+    },
+    { icon: <FaLeaf className="text-green-500 text-xl" />, label: "Pure Veg" },
+    { icon: <FaUtensils className="text-red-500 text-xl" />, label: "Buffet" },
+    { icon: <FaGift className="text-red-500 text-xl" />, label: "Must Visit" },
+    {
+      icon: <FaHamburger className="text-red-500 text-xl" />,
+      label: "New Restaurants",
+    },
+  ];
+
   return (
     <>
       <div className="relative h-[75vh] bg-cover bg-center bg-[url('/banner.jpg')]">
@@ -79,28 +125,75 @@ const OnboardUser = () => {
           <p className="text-gray-200 text-lg mb-6">
             Discover the best restaurants near you
           </p>
+          {/* Bug Hai fix krna hai baad me */}
+          <div className="flex justify-center items-center w-full bg-cover h-20 bg-[url('/path-to-background.jpg')]">
+            <div className="flex items-center bg-white rounded-md shadow-md px-4 py-2 space-x-2 w-2/3 max-w-4xl">
+              {/* Location Section */}
 
-          <form className="w-full max-w-xl p-2 bg-black bg-opacity-40 rounded-md shadow-lg">
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                <FiSearch size={20} className="text-red-500" />
-              </span>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search for Restaurants, Cuisines, Location ..."
-                className="w-full p-3 pl-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
-              <button
-                type="button"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-500 text-white px-4 py-2 rounded-md"
-              >
-                Search
-              </button>
+              <div className="relative flex items-center space-x-2">
+                <MdLocationPin className="text-red-500 w-7 h-7" />
+                <Input
+                  type="text"
+                  placeholder="Pune"
+                  className="w-full border-none focus:outline-none focus:ring-0"
+                  onFocus={handleFocus}
+                />
+                {isOpen ? (
+                  <FaCaretUp
+                    className="text-gray-500 cursor-pointer"
+                    onClick={toggleDropdown}
+                  />
+                ) : (
+                  <FaCaretDown
+                    className="text-gray-500 cursor-pointer"
+                    onClick={toggleDropdown}
+                  />
+                )}
+                {/* Dropdown content */}
+                {isOpen && (
+                  <div className="absolute -left-6 top-full mt-3 w-[281px] bg-white border rounded-lg shadow-md p-4 z-10">
+                    <div className="flex items-center gap-3">
+                      <FaCrosshairs className="text-red-500" />
+                      <div>
+                        <p className="text-red-500 font-medium">
+                          Detect current location
+                        </p>
+                        <p className="text-sm text-gray-500">Using GPS</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Divider */}
+              <div className="h-5 border-l border-gray-300 mx-2"></div>
+
+              {/* Search Section */}
+              <div className="flex-grow flex items-center space-x-2">
+                <FiSearch className="text-red-500 w-7 h-7" />
+                <Input
+                  type="text"
+                  placeholder="Search for restaurant, cuisine or a dish"
+                  className="w-full border-none focus:outline-none focus:ring-0"
+                />
+              </div>
             </div>
-          </form>
+          </div>
         </div>
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-4 sm:mt-3 md:mt-6">
+        {categories.map((category, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-2 border border-gray-300 rounded-full px-4 py-2 hover:shadow-lg transition-all cursor-pointer"
+          >
+            {category.icon}
+            <span className="text-sm font-medium text-gray-700">
+              {category.label}
+            </span>
+          </div>
+        ))}
       </div>
 
       {/* Restaurants section */}
@@ -150,6 +243,9 @@ const OnboardUser = () => {
           })}
         </div>
       </div>
+
+{/* Banner Section */}
+<Banner />
 
       {/* customers choice section */}
       <div className="container mx-auto px-4 py-8">
