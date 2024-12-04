@@ -13,87 +13,73 @@ import { RestaurantListProps } from "@/types/global";
 
 export const restaurants: RestaurantListProps[] = [
   {
-    name: "Inja",
-    location: "New Friends Colony, South Delhi",
-    imageUrl: interiorLogo6, // Replace with actual image path
-    rating: 4.6,
-    distance: "2.5 km",
+    name: "My Bar Headquarters",
+    location: "Connaught Place, Central Delhi",
+    imageUrl: interiorLogo8,
+    rating: 4.5,
+    distance: "100 km",
   },
   {
-    name: "Indian Accent",
-    location: "The Lodhi Hotel, South Delhi",
-    imageUrl: barbequeLogo, // Replace with actual image path
-    rating: 4.8,
-    distance: "3.2 km",
+    name: "The G.T. Road",
+    location: "Connaught Place, Central Delhi",
+    imageUrl: interiorLogo5,
+    rating: 4.3,
+    distance: "100 km",
   },
   {
-    name: "Diggin",
-    location: "Anand Lok, South Delhi",
-    imageUrl: interiorBarLogo, // Replace with actual image path
-    rating: 4.4,
-    distance: "1.8 km",
+    name: "Sandoz",
+    location: "Connaught Place, Central Delhi",
+    imageUrl: interiorLogo3,
+    rating: 3.9,
+    distance: "100 km",
   },
   {
-    name: "Guppy",
-    location: "Lodhi Colony, South Delhi",
-    imageUrl: interiorLogo1, // Replace with actual image path
-    rating: 4.7,
-    distance: "3.5 km",
+    name: "Barbeque Nation",
+    location: "Connaught Place, Central Delhi",
+    imageUrl: barbequeLogo,
+    rating: 4.3,
+    distance: "100 km",
+  },
+  {
+    name: "AMA Cafe",
+    location: "New Aruna Nagar, New Delhi",
+    imageUrl: interiorLogo1,
+    rating: 4.5,
+    distance: "100 km",
+  },
+  {
+    name: "The Qube",
+    location: "Chanakyapuri, New Delhi",
+    imageUrl: interiorBarLogo,
+    rating: 4.3,
+    distance: "100 km",
+  },
+  {
+    name: "Tamra Restaurant",
+    location: "Connaught Place, Central Delhi",
+    imageUrl: interiorLogo4,
+    rating: 3.9,
+    distance: "100 km",
+  },
+  {
+    name: "Caffè Tonino",
+    location: "Connaught Place, Central Delhi",
+    imageUrl: interiorLogo6,
+    rating: 4.3,
+    distance: "100 km",
   },
   {
     name: "Olive Bar & Kitchen",
-    location: "Mehrauli, South Delhi",
-    imageUrl: interiorLogo7, // Replace with actual image path
-    rating: 4.6,
-    distance: "4.0 km",
-  },
-  {
-    name: "Perch Wine & Coffee Bar",
-    location: "Khan Market, South Delhi",
-    imageUrl: interiorLogo3, // Replace with actual image path
+    location: "Mehrauli, New Delhi",
+    imageUrl: interiorLogo7,
     rating: 4.5,
-    distance: "2.0 km",
+    distance: "100 km",
   },
   {
-    name: "Lodhi - The Garden Restaurant",
-    location: "Lodhi Road, South Delhi",
-    imageUrl: interiorLogo4, // Replace with actual image path
-    rating: 4.7,
-    distance: "3.0 km",
-  },
-  {
-    name: "Cafe Lota",
-    location: "National Crafts Museum, South Delhi",
-    imageUrl: interiorLogo5, // Replace with actual image path
+    name: "The Grammar Room",
+    location: "Mehrauli, New Delhi",
+    imageUrl: interiorLogo1,
     rating: 4.3,
-    distance: "3.8 km",
-  },
-  {
-    name: "Big Chill",
-    location: "Kailash Colony, South Delhi",
-    imageUrl: interiorLogo6, // Replace with actual image path
-    rating: 4.6,
-    distance: "2.5 km",
-  },
-  {
-    name: "Bukhara",
-    location: "ITC Maurya, South Delhi",
-    imageUrl: interiorLogo4, // Replace with actual image path
-    rating: 4.9,
-    distance: "5.0 km",
-  },
-  {
-    name: "Cafe Dori",
-    location: "Chattarpur, South Delhi",
-    imageUrl: interiorLogo8, // Replace with actual image path
-    rating: 4.4,
-    distance: "4.5 km",
-  },
-  {
-    name: "Cafe Lota",
-    location: "National Crafts Museum, South Delhi",
-    imageUrl: interiorLogo5, // Replace with actual image path
-    rating: 4.3,
-    distance: "3.8 km",
+    distance: "100 km",
   },
 ];
