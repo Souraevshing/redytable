@@ -11,6 +11,8 @@ import { useQuery } from "react-query";
 import { customerChoices } from "@/constants/customers-choice";
 import { restaurants } from "@/constants/restaurants";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { categories } from "@/constants/categories";
 
 /**
  * @description `filter` restaurants by sending `search query`
@@ -71,20 +73,29 @@ const OnboardUser = () => {
 
   return (
     <>
-      <div className="relative h-[75vh] bg-cover bg-center bg-[url('/banner.jpg')]">
+      {/* Banner section */}
+      <div className="relative h-[500px]">
+      <Image 
+        src="/banner.jpg"
+        alt="Restaurant Banner"
+        width={1920}
+        height={500}
+        className="object-cover w-full h-full"
+        priority
+      />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
-          <h1 className="text-white text-4xl font-bold mb-2">
-            Find Your Favorite Meal
+          <h1 className="text-white text-4xl md:text-5xl font-bold mb-8 text-center">
+          Discover and book the best restaurant
           </h1>
-          <p className="text-gray-200 text-lg mb-6">
+          {/* <p className="text-gray-200 text-lg mb-6">
             Discover the best restaurants near you
-          </p>
+          </p> */}
 
-          <form className="w-full max-w-xl p-2 bg-black bg-opacity-40 rounded-md shadow-lg">
+          <form className="w-full max-w-xl p-2  bg-opacity-40 ">
             <div className="relative">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              {/* <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                 <FiSearch size={20} className="text-red-500" />
-              </span>
+              </span> */}
               <input
                 type="text"
                 value={searchTerm}
@@ -92,14 +103,29 @@ const OnboardUser = () => {
                 placeholder="Search for Restaurants, Cuisines, Location ..."
                 className="w-full p-3 pl-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
-              <button
-                type="button"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-500 text-white px-4 py-2 rounded-md"
-              >
+              <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
                 Search
-              </button>
+              </Button>
             </div>
           </form>
+        </div>
+      </div>
+
+      {/* Categories section */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-center gap-6 flex-wrap max-w-6xl mx-auto">
+          {categories.map((category) => (
+            <Button
+              key={category.name}
+              variant="outline"
+              className={`flex items-center gap-2 px-6 py-3 rounded-md border min-w-[160px] justify-center ${
+                category.name === 'Pure Veg' ? 'text-green-600 border-green-600 hover:bg-green-50' : 'text-red-500 border-red-500 hover:bg-red-50'
+              }`}
+            >
+              {category.icon}
+              <span>{category.name}</span>
+            </Button>
+          ))}
         </div>
       </div>
 
@@ -182,6 +208,7 @@ const OnboardUser = () => {
           })}
         </div>
       </div>
+
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Restaurants Chosen For You</h2>

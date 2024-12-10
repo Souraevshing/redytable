@@ -1,5 +1,5 @@
 import { StaticImageData } from "next/image";
-
+import { LucideIcon } from 'lucide-react';
 declare interface RestaurantListProps {
   name: string;
   location: string;
@@ -83,4 +83,10 @@ declare interface RestaurantDetailsProps {
   address: string;
   rating: number;
   reviews: number;
+}
+
+declare interface CategoryProps {
+  name: string;
+  href: string;
+  icon: React.ReactNode;
 }
