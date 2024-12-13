@@ -6,6 +6,7 @@ import FooterWrapper from "@/components/FooterWrapper";
 import Navbar from "@/components/Navbar";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import StoreProvider from "@/providers/StoreProvider";
+import ScrollLockWrapper from "@/components/ScrollLockWrapper"; // New wrapper for scroll logic
 import "./globals.css";
 
 const geistSans = localFont({
@@ -27,16 +28,16 @@ export const metadata: Metadata = {
 /**
  * @description `root` layout is the index or root file that is `rendered` for the first time
  */
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <StoreProvider>
           <ReactQueryProvider>
             <Toaster
@@ -51,12 +52,16 @@ export default function RootLayout({
               theme="dark"
               toastOptions={{ style: { appearance: "progress-bar" } }}
             />
-            <Navbar />
-            {children}
-            <FooterWrapper />
+            <ScrollLockWrapper>
+              <Navbar />
+              {children}
+              <FooterWrapper />
+            </ScrollLockWrapper>
           </ReactQueryProvider>
         </StoreProvider>
       </body>
     </html>
   );
 }
+
+
