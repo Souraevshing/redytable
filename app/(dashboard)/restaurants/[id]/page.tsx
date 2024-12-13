@@ -1,11 +1,11 @@
 import Image from "next/image";
-
 import { interiorLogo1 } from "@/constants/images";
 import MenuSection from "../_components/MenuSection";
 import RestaurantDetails from "../_components/RestaurantDetails";
 import RestaurantGallery from "../_components/RestaurantGallery";
 import ReviewSection from "../_components/ReviewSection";
 import SimilarRestaurants from "../_components/SimilarRestaurants";
+
 
 export default function RestaurantPage() {
   return (
