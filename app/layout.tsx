@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
 
-import FooterWrapper from "@/components/FooterWrapper";
-import Navbar from "@/components/Navbar";
+import ComingSoon from "@/components/page";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import "./globals.css";
@@ -51,9 +50,11 @@ export default function RootLayout({
               theme="dark"
               toastOptions={{ style: { appearance: "progress-bar" } }}
             />
-            <Navbar />
+            {/* <Navbar />
             {children}
-            <FooterWrapper />
+            <FooterWrapper /> */}
+            {/* TODO Work InProgress **/}
+            <ComingSoon />
           </ReactQueryProvider>
         </StoreProvider>
       </body>
